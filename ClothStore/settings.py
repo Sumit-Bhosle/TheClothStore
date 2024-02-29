@@ -141,5 +141,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/Prod_Images/'
 
 # RAZOR PAYMENT GATEWAY INTEGRATION 
-razor_pay_key_id = 'rzp_test_pehBAaPbvkjeSh'
-key_secret = 'pVEQvgCplr3xNuaaRVOFulmL'
+razor_pay_key_id = 'Your ID '
+key_secret = 'Your Secret key'
