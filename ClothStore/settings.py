@@ -141,5 +141,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/Prod_Images/'
 
 # RAZOR PAYMENT GATEWAY INTEGRATION 
-razor_pay_key_id = 'Your ID '
-key_secret = 'Your Secret key'
+razor_pay_key_id = 'rzp_test_pehBAaPbvkjeSh'
+key_secret = 'pVEQvgCplr3xNuaaRVOFulmL'
+SECURE_CROSS_ORIGIN_OPENER_POLICY = "same-origin-allow-popups"

@@ -57,6 +57,17 @@
             "description": "Purchase Description",
             "image": "/your_logo.png",
             "handler": function (response){
+                if(response.razorpay_payment_id)
+                {
+                    createOrder(response);
+                }
+                else if(response.error && response.error.code == "payment.cancelled")
+                {
+                    alert('Payment Cancelled');
+                }
+                else{
+                    alert("Some issue with Payment");
+                }
                 alert(response.razorpay_payment_id);
                 // do an ajax call to backend and capture and verify the payment then 
                   //redirect to payment success page.
@@ -78,6 +89,33 @@
             rzp1.open();
             e.preventDefault();
         }
-        </script>
+
+        function createOrder(paymentResponse)
+        {
+            $.ajax({
+                type : 'POST',
+                url : 'update_create_order',
+                data:{
+                    'payment_id':paymentResponse.razorpay_payment_id,
+                    'user_email': '{{ request.user.email }}',
+                    'total_price': '{{ total_price }}',
+                    'tax': '{{ tax }}',
+                    'grand_total': '{{ grand_total }}'
+                },
+                success:function(orderCreationResponse){
+                    console.log(orderCreationResponse.message);
+                    window.location.href = 'thank_you_page';
+
+                },
+
+                error:function(error)
+                {
+                    console.log(error);
+                    alert('Error in creating the Order');
+                }
+            });
+        }
+
+    </script>
 
 {% endblock %}

@@ -61,7 +61,6 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 }
 
 body {
-  /* background: linear-gradient(90deg, #A770EF 0%, #CF8BF3 31%, #FDB99B 100%); */
   margin: 0;
   font-family: "Inter", Arial, "Helvetica Neue", "Segoe UI", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 1rem;
@@ -69,7 +68,7 @@ body {
   line-height: 1.5;
   color: #343a40;
   text-align: left;
-  background-color: #ffedfa;
+  background-color: #ffffff;
 }
 
 
@@ -273,6 +272,7 @@ button,
 [type=reset],
 [type=submit] {
   -webkit-appearance: button;
+  appearance: button;
 }
 
 button:not(:disabled),
@@ -301,6 +301,7 @@ input[type=time],
 input[type=datetime-local],
 input[type=month] {
   -webkit-appearance: listbox;
+  appearance: listbox;
 }
 
 textarea {
@@ -339,6 +340,7 @@ progress {
 [type=search] {
   outline-offset: -2px;
   -webkit-appearance: none;
+  appearance: none;
 }
 
 [type=search]::-webkit-search-decoration {

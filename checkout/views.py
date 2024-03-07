@@ -6,6 +6,8 @@ from decimal import Decimal, ROUND_HALF_UP
 from django.contrib.sessions.models import Session
 from django.views.decorators.csrf import csrf_exempt 
 from django.http import JsonResponse
+from .models import Order,OrderItem
+
 
 # Create your views here.
 def checkout_page(request):
@@ -156,3 +158,49 @@ def final_order(request):
 
         return render(request,"final_order.html",context)
                 
+@csrf_exempt
+def update_create_order(request):
+    if request.method == "POST":
+        payment_id = request.POST.get('payment_id')
+        total_price = request.POST.get('total_price')
+        tax = request.POST.get('tax')
+        grand_total = request.POST.get('grand_total')
+        user_email = request.POST.get('user_email')
+
+        try:
+            user = Account.objects.get(email=user_email)
+            cart_items = CartItem.objects.filter(user=user)
+        except Account.DoesNotExist:
+            return JsonResponse({'error':'User Not Found'},status=400)
+        
+        order,created = Order.objects.get_or_create(payment_id=payment_id, defaults={
+            'total_price':total_price,
+            'tax':tax,
+            'grand_total':grand_total,
+            'user':user,
+            'status':'Pending'
+        })
+
+        # updating the Order Status
+        order.status = "Processing"
+        order.save()
+        for cart_item in cart_items:
+            product = cart_item.product
+            quantity = cart_item.quantity
+            order_item,created = OrderItem.objects.get_or_create(order=order,product=product,defaults={'quantity':quantity})
+
+            #if item is already available update the quantity
+            if not created:
+                order_item.quantity += quantity
+
+            order_item.save()
+
+        return JsonResponse({'message':'Order Created Successfully'})
+    
+    return JsonResponse({'message':'Invalid User Request'})
+    
+
+
+def thank_you_page(request):
+    return render(request, "thank_you_page.html")
+
