@@ -1,0 +1,54 @@
+Customize Admin Panel
+
+[ClothApp]
+    > admin.py
+        >>> admin.site.site_header="GIVE HEADER FOR YOUR ADMIN PANEL"
+        >>> admin.site.index_title="GIVE TITLE FOR YOUR ADMIN PANEL"
+
+    > create & register Custom Tables in ADMIN PANEL
+        > create a class 
+            > write query to fetch desired data for columns to add -
+                
+                >>> class "className" (admin.ModelAdmin):
+                        "listName" = ['Column/table names','Column/table names',.....]
+                                      -- make sure to match names with model names-- 
+
+                        list_per_page = 5   -- Inbuilt feature to display data per page on ADMIN PANEL
+                        list_filter  = ['columnName']   - Help to add Filter in ADMIN PANEL
+                        search_fields = ['columnName']  - to add Search bar in ADMIN PANEL
+            
+            > Register Custom tables - 
+                >>> admin.site.register("ClassName") -- custom class created by you                                                      
+
+
+
+------------------------------------------------ DJANGO FORMS ----------------------------------------------
+
+Django Forms Is Inbuilt feature to create Fast and ready to go forms 
+    for User/Client without spending more time in HTML and styling. 
+
+FORMS - Each class represents for each Respective Form. per Class per Form basis
+        eg: -  class RegistrationForm =  Registration FORM 
+               class login = Login Form    
+
+[accounts]
+    > forms.py
+        imports-
+            >>> from django import forms
+                from django.contrib.auth.forms import UserCreationForm
+                from .models import Account
+
+        > create class(RegistrationForm)
+            > add fields for forms as per your model(Account)
+            > write boostrap attributes for each fields to customize your default form structure (look & feel)
+
+    > views.py
+        import - 
+            >>> from .forms import RegistrationForm
+        > create Methods/functions To fetch our RegistrationForm
+        ( DJango logics for Forms must be based on methods GET/POST)
+        >                       
+
+
+
+

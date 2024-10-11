@@ -7,7 +7,8 @@ import uuid
 class OrderItem(models.Model):
     product = models.ForeignKey(Products,on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
-
+    ord = models.ForeignKey('Order', on_delete=models.CASCADE, related_name='order_items', default = 'None')
+    
     def __str__(self) :
         return f"{self.quantity} x {self.product.product_name}"
     
