@@ -1,8 +1,10 @@
 from pathlib import Path
 import os
-import dotenv # type: ignore
+import dotenv
+import dj_database_url  # Added for database URL parsing
 
-dotenv.load_dotenv()  # Load environment variables from a .env file
+# Load environment variables from a .env file
+dotenv.load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -63,23 +65,19 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ClothStore.wsgi.application'
+
 AUTH_USER_MODEL = 'accounts.Account'
 AUTHENTICATION_BACKENDS = [
-    'accounts.backends.MyBackEnd',   # Custom Authentication Backend for user login sessions
+    'accounts.backends.MyBackEnd',  # Custom Authentication Backend for user login sessions
     'django.contrib.auth.backends.ModelBackend',  # Default Authentication Backend
 ]
 
 # Database
 # Use environment variables for sensitive information
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('DB_NAME', 'cloth_db'),
-        'USER': os.getenv('DB_USER', 'root'),
-        'PASSWORD': os.getenv('DB_PASSWORD', 'password'),
-        'HOST': os.getenv('DB_HOST', 'localhost'),
-        'PORT': os.getenv('DB_PORT', '3306'),
-    }
+    'default': dj_database_url.config(
+        default=os.getenv('DATABASE_URL', 'postgresql://root:password@localhost:5432/cloth_db')
+    )
 }
 
 # Password validation
@@ -119,7 +117,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_IGNORE_PATTERNS = ['*.map']
-
 
 # Media files
 MEDIA_URL = '/media/'
