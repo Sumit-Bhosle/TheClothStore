@@ -20,7 +20,7 @@ node_modules/
 
 # Media and static files
 media/
-staticfiles/
+
 
 # IDEs and editors
 .vscode/

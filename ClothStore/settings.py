@@ -3,6 +3,8 @@ import os
 import dotenv
 import dj_database_url  # Added for database URL parsing
 
+
+
 # Load environment variables from a .env file
 dotenv.load_dotenv()
 
@@ -74,11 +76,16 @@ AUTHENTICATION_BACKENDS = [
 
 # Database
 # Use environment variables for sensitive information
+
+dotenv.load_dotenv()
+
+# Database configuration using environment variables
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL', 'postgresql://root:password@localhost:5432/cloth_db')
+        default=os.getenv('DATABASE_URL')
     )
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
