@@ -1,9 +1,7 @@
 from pathlib import Path
 import os
 import dotenv
-import dj_database_url  # Added for database URL parsing
-
-
+import dj_database_url  # Import dj_database_url for database URL parsing
 
 # Load environment variables from a .env file
 dotenv.load_dotenv()
@@ -74,18 +72,14 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',  # Default Authentication Backend
 ]
 
-# Database
-# Use environment variables for sensitive information
-
-dotenv.load_dotenv()
-
 # Database configuration using environment variables
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL')
+        default=os.getenv('DATABASE_URL'),  # Parses the DATABASE_URL from the .env file
+        conn_max_age=600,  # Optional: Max lifetime of database connections
+        ssl_require=False  # Optional: If you want SSL connection to DB
     )
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
