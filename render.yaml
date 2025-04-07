@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: clothstore
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn ClothStore.wsgi:application"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: ClothStore.settings
