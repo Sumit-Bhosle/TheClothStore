@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+Dev-Ecom/
+
+
+# Django stuff
+db.sqlite3
+*.sqlite3
+*.log
+*.pot
+*.pyc
+*.mo
+
+# Migrations (Optional: keep if you're actively developing)
+**/migrations/0*_*.py
+**/migrations/__pycache__/
+
+# Static files
+staticfiles/
+media/
+
+# VSCode
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env file
+.env
+
+# Miscellaneous
+*.csv
+*.txt

@@ -1,0 +1,49 @@
+
+<!-- HEADER -->
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- ========================= SECTION MAIN ========================= -->
+<section class="section-intro padding-y-sm">
+<div class="container">
+
+
+</div> <!-- container //  -->
+</section>
+<!-- ========================= SECTION MAIN END// ========================= -->
+
+<!-- ========================= SECTION  ========================= -->
+<section class="section-name padding-y-sm">
+<div class="container">
+
+<header class="section-heading">
+	<h3 class="section-title">TOP RESULTS</h3>
+</header><!-- sect-heading -->
+
+	
+<div class="row">
+	{% for product in product_by_category %}
+	<div class="col-md-3">
+		<div class="card card-product-grid">
+			<a href="{% url 'product-detail' id=product.id %}" class="img-wrap"> <img src= '{{ product.product_image.url }}'> </a>
+			<figcaption class="info-wrap">
+				<a href="{% url 'product-detail' id=product.id %}" class="title">{{ product.product_name }}</a>
+				<div class="price mt-1">{{ product.product_price }}₹</div> <!-- price-wrap.// -->
+			</figcaption>
+		</div>
+	</div> <!-- col.// -->
+	{% endfor %}
+	
+</div> <!-- row.// -->
+
+</div><!-- container // -->
+</section>
+<!-- ========================= SECTION  END// ========================= -->
+
+<!-- FOOTER -->
+
+</body>
+</html>
+
+{% endblock %}

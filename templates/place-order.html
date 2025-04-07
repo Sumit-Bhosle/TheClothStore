@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<section class="section-content padding-y bg">
+<div class="container">
+
+	<section class="section-content padding-y bg">
+		<div class="container">
+		
+		<!-- ============================ COMPONENT 1 ================================= -->
+		
+		<div class="row">
+			<aside class="col-lg-9">
+		<div class="card">
+		{% if cart_items %}	
+		<table class="table table-borderless table-shopping-cart">
+		<thead class="text-muted">
+		<tr class="small text-uppercase">
+		  <th scope="col">Product</th>
+		  <th scope="col" width="120">Quantity</th>
+		  <th scope="col" width="120">Price</th>
+		  <th scope="col" class="text-right" width="200"> </th>
+		</tr>
+		</thead>
+		<tbody>
+            {% for cart_item in cart_items %}
+		<tr>
+			<td>
+				<figure class="itemside align-items-center">
+					<div class="aside"><img src="{{ cart_item.product.product_image.url }}" class="img-sm">
+                    </div>
+					<figcaption class="info">
+						<a href="#" class="title text-dark">{{ cart_item.product.product_name }}</a>						
+					</figcaption>
+				</figure>
+			</td>
+			<td> 
+				<!-- col.// -->
+							<div class="col"> 
+								<div class="input-group input-spinner">
+									<div class="input-group-prepend">
+									<button class="btn btn-light" type="button" id="button-minus-{{ cart_item.id }}"
+									onclick="updateQuantity('{{ cart_item.id }}',-1,'{{ cart_item.id }}')"> <i class="fa fa-minus"></i> </button>
+									</div>
+									<input type="text" class="form-control"  value="{{ cart_item.quantity }}">
+									<div class="input-group-append">
+									<button class="btn btn-light" type="button" id="button-plus-{{ cart_item.id }}"
+									onclick="updateQuantity('{{ cart_item.id }}',1,'{{ cart_item.id }}')"> <i class="fa fa-plus"></i> </button>
+									</div>
+								</div> <!-- input-group.// -->
+							</div> <!-- col.// -->
+			</td>
+			<td> 
+				<div class="price-wrap"> 
+					<var class="price" id="item-total-price-{{ forloop.counter }}">Rs {{ cart_item.cost_per_item|floatformat:2 }}</var> 
+					<small class="text-muted"> Rs {{ cart_item.product.product_price }} each </small> 
+				</div> <!-- price-wrap .// -->
+			</td>
+			<td class="text-right"> 
+			<a href="" class="btn btn-danger" onclick="removeCartItem('{{ cart_item.id }}')"> Remove</a>
+			</td>
+		</tr>
+        {% endfor %}
+		</tbody>
+		</table>
+		{% else %}
+			<div class = "text-center py-4">
+				<h3 style= > No Items In Cart </h3>
+			</div>
+		{% endif %}
+		
+
+		</div> <!-- card.// -->
+		
+			</aside> <!-- col.// -->
+			<aside class="col-lg-3">
+		
+				<div class="card">
+				<div class="card-body">
+					<dl class="dlist-align">
+					  <dt>Total price:</dt>
+					  <dd class="text-right" id="total-price">₹ {{ total_price }}</dd>
+					</dl>
+					<dl class="dlist-align">
+					  <dt>Tax:</dt>
+					  <dd class="text-right" id="tax">₹ {{ tax }}</dd>
+					</dl>
+					<dl class="dlist-align">
+					  <dt>Total:</dt>
+					  <dd class="text-right text-dark b" id="grand-total"><strong>₹ {{ grand_total }}</strong></dd>
+					</dl>
+					<hr>
+					<p class="text-center mb-3">
+						<img src="{% static 'misc/payments.png' %}" height="26">
+					</p>
+					<a href="{% url 'order_placement' %}" class="btn btn-primary btn-block"> Checkout </a>
+					<a href="{% url 'home' %}" class="btn btn-light btn-block">Continue Shopping</a>
+				</div> <!-- card-body.// -->
+				</div> <!-- card.// -->
+		
+		</aside> <!-- col.// -->
+		
+		
+		</div> <!-- row.// -->
+		<!-- ============================ COMPONENT 1 END .// ================================= -->
+		
+		</div> <!-- container .//  -->
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<script>
+		function updateQuantity(cartItemId,quantityChange){
+			
+			var data = {
+				'cart_item_id':cartItemId,
+				'quantity_change':quantityChange
+			};
+			$.ajax({
+				type:'POST',
+				url:'update_quantity',
+				data : data,
+				success:function(response){
+					//update the frontend elements with the new data
+					updateFrontEnd(response);
+				},
+
+				error: function(error){
+					console.log(error);
+				}
+			});
+
+		}
+
+		function updateFrontEnd(data) {
+
+			Swal.fire({
+				icon:'success',
+				title:'Item Updated Successfully',
+				showConfirmButton:false,
+				timer:2000
+			});
+
+			setTimeout(function(){
+				location.reload();
+			},2000);
+
+		}
+
+		function removeCartItem(cartItemId) {
+			$.ajax({
+				type: 'POST',
+				url: 'remove_item/' + cartItemId,
+				success: function (response) {
+					// Use SweetAlert to show a success message
+					Swal.fire({
+						icon: 'success',
+						title: 'Item removed successfully!',
+						showConfirmButton: false,
+						timer: 2000  // Close the alert after 2 seconds
+					});
+				},
+				error: function (error) {
+					console.log(error);
+				}
+			});
+
+			setTimeout(function(){
+				location.reload();
+			},2000);
+		}
+
+		
+
+	</script>
+</section>
+{% endblock %}
