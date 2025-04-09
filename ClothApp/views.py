@@ -3,6 +3,18 @@ from django.shortcuts import render,get_object_or_404
 from .models import Products,Category
 from django.db.models import Q
 
+# Temperory migration for RENDER HOSTING
+
+from django.core.management import call_command
+
+def setup(request):
+    call_command('migrate')
+    import accounts.management.commands.initialize as initialize
+    initialize.run()
+    return HttpResponse("Migration & Initial Data Loaded ✅")
+
+
+
 
 # Create your views here.
 
