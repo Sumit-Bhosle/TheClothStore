@@ -22,7 +22,8 @@ db.sqlite3
 *.mo
 
 # Migrations (Optional: keep if you're actively developing)
-**/migrations/0*_*.py
+- **/migrations/0*_*.py
++ # **/migrations/0*_*.py
 **/migrations/__pycache__/
 
 # Static files
@@ -42,3 +43,5 @@ Thumbs.db
 # Miscellaneous
 *.csv
 settings.txt
+setup_done.flag
+
