@@ -25,6 +25,7 @@ db.sqlite3
 - **/migrations/0*_*.py
 + # **/migrations/0*_*.py
 **/migrations/__pycache__/
+initialize.py
 
 # Static files
 staticfiles/
@@ -44,4 +45,5 @@ Thumbs.db
 *.csv
 settings.txt
 setup_done.flag
+setup data.txt
 

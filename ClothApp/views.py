@@ -6,7 +6,6 @@ from django.db.models import Q
 # Temperory migration for RENDER HOSTING
 
 from django.core.management import call_command
-from django.http import HttpResponse
 
 def setup(request):
     call_command('migrate')
