@@ -37,7 +37,7 @@ class Command(BaseCommand):
             self.stdout.write("✅ Superuser already exists.")
 
         # Default Categories
-        default_categories = ['Men', 'Women', 'Kids']
+        default_categories = ['Men', 'Women', 'Unisex']
 
         self.stdout.write("🛒 Checking for default categories...")
         for cat in default_categories:

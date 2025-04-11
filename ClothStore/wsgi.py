@@ -11,6 +11,10 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
+# import accounts.management.commands.initialize as initialize
+# initialize.run()
+
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ClothStore.settings')
 
 application = get_wsgi_application()

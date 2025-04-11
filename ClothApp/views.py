@@ -4,7 +4,6 @@ from .models import Products,Category
 from django.db.models import Q
 
 # Temperory migration for RENDER HOSTING
-from django.http import HttpResponse
 from django.core.management import call_command
 from django.contrib.auth.decorators import user_passes_test
 from django.conf import settings
