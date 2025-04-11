@@ -6,12 +6,12 @@ from django.db.models import Q
 
 # Temperory migration for RENDER HOSTING
 
-# from django.core.management import call_command
+from django.core.management import call_command
 
-# def setup(request):
-#     call_command('migrate')
-#     call_command('initialize')  # this runs your custom management command
-#     return HttpResponse("Migration & Initial Data Loaded ✅")
+def setup(request):
+    call_command('migrate')
+    call_command('initialize')  # this runs your custom management command
+    return HttpResponse("Migration & Initial Data Loaded ✅")
 
 
 # Create your views here.
