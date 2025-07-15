@@ -6,5 +6,6 @@ urlpatterns=[
     path('product-detail/<int:id>/',views.product_detail,name='product-detail'),
     path('category/<int:id>/',views.category_data,name='category_data'),
     path('search/',views.search_product,name='search'),
-    path('setup/', views.setup),# url to TEMPERORY LOGIC FOR MIGRATIONS
+    path('setup/', views.setup, name='setup'),# url to TEMPERORY LOGIC FOR MIGRATIONS
+    
 ]
