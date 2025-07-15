@@ -12,6 +12,7 @@ class Products(models.Model):
     gender_option = (('men','MEN'),('women','WOMEN'),('unisex','UNISEX'))
     product_name = models.CharField(max_length=100)
     product_image = models.ImageField(upload_to="Prod_Images",default=None)
+    image_file = models.CharField(max_length=255, default="default.jpg")
     product_description = models.TextField()
     product_price = models.DecimalField(max_digits=10,decimal_places=2)
     product_category = models.ForeignKey(Category,on_delete=models.CASCADE)
