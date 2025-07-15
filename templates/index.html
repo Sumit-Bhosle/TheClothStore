@@ -26,7 +26,7 @@
 </header><!-- sect-heading -->
 
 	
-<div class="row">
+{% comment %} <div class="row">
 	{% for product in info %}
 	<div class="col-md-3">
 		<div class="card card-product-grid">
@@ -39,7 +39,25 @@
 	</div> <!-- col.// -->
 	{% endfor %}
 	
-</div> <!-- row.// -->
+</div> <!-- row.// --> 
+{% endcomment %}
+
+
+<div class="row">
+  {% for product in info %}
+    <div class="col-md-3">
+      <div class="card card-product-grid">
+        <a href="{% url 'product-detail' id=product.id %}" class="img-wrap">
+          <img src="{% static 'products/'|add:product.image_file %}" alt="{{ product.product_name }}">
+        </a>
+        <figcaption class="info-wrap">
+          <a href="{% url 'product-detail' id=product.id %}" class="title">{{ product.product_name }}</a>
+          <div class="price mt-1">{{ product.product_price }}₹</div>
+        </figcaption>
+      </div>
+    </div>
+  {% endfor %}
+</div>
 
 </div><!-- container // -->
 </section>

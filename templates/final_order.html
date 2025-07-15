@@ -22,8 +22,8 @@
                                             <tr>
                                                 <td>
                                                     <div class="media">
-                                                        <img src="{{ cart_item.product.product_image.url }}" alt="Product Image" class="img-thumbnail mr-3" width="50">
-
+                                                        {% comment %} <img src="{{ cart_item.product.product_image.url }}" alt="Product Image" class="img-thumbnail mr-3" width="50"> {% endcomment %}
+                                                        <img src="{% static 'products/'|add:cart_item.product.image_file %}" alt="{{ cart_item.product.product_name }}" class="img-thumbnail mr-3" width="50">
                                                         <div class="media-body">
                                                             <h5 class="mt-0">{{ cart_item.product.product_name }}</h5>
                                                         </div>

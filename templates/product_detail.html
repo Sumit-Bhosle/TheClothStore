@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 
 <section class="section-content padding-y bg">
@@ -8,12 +9,22 @@
     <div class="card">
         <div class="row no-gutters">
             <aside class="col-md-6">
-    <article class="gallery-wrap"> 
-        <div class="img-big-wrap">
-           <a href="#"><img src="{{ product_info.product_image.url }}"></a>
-        </div> <!-- img-big-wrap.// -->
-        
-    </article> <!-- gallery-wrap .end// -->
+                <article class="gallery-wrap"> 
+
+                    {% comment %} <div class="img-big-wrap">
+                    <a href="#"><img src="{{ product_info.product_image.url }}"></a>
+                    </div>  {% endcomment %}
+                    {% load static %}
+
+                    <div class="img-big-wrap">
+                        <a href="#">
+                            <img src="{% static 'products/'|add:product_info.image_file %}" alt="{{ product_info.product_name }}">
+                        </a>
+                    </div>
+
+                    <!-- img-big-wrap.// -->
+                    
+                </article> <!-- gallery-wrap .end// -->
             </aside>
             <main class="col-md-6 border-left">
     <article class="content-body">
