@@ -2,6 +2,9 @@
 
 An elegant and responsive online clothing store built using **Django**, **MySQL**, and **Razorpay** for payment integration. Built with modular apps for product management, user authentication, cart, and checkout system.
 
+DEMO USER Credentials - 
+username - demouser@gmail.com or demouser
+password - newUser1
 ---
 
 ## 🚀 Features
